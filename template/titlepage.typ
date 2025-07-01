@@ -1,17 +1,14 @@
-#let titlepage(author: ()) = {
+#let titlepage(paper: (), author: ()) = {
   align(center)[
-    #text(2.5em)[AKAD Bildungsgesellschaft mbH] \
-    #text(1.5em)[Software Engineering - Bachelor of Engineering (B. Eng.)]
-    #v(4em)
-    #image("assets/Akad_University_Logo.png", width: 40%)
+    #image("assets/Akad_University_Logo.png", width: 30%)
+    #v(2em)
+    AKAD Bildungsgesellschaft mbH \
+    #paper.courseOfStudy
     #v(5em)
-    #text(1.5em)[
-      *Laborbericht* \
-      WEB42S - Webprojekt I \
-      #v(1em)
-      *Webprojekt I* \
-      WEB42S-LB
-    ]
+    #text(1.5em)[*#paper.title*]
+    #v(2em)
+      #paper.type \
+      #paper.module
   ]
 
   align(bottom + left)[
@@ -24,9 +21,9 @@
       [Adresse:], [#author.street, #author.city],
       [Imma. Nr.:], [#author.studentId],
       [Email:], [#link("mailto:" + author.email)],
-      [Anmeldedatum:], [#author.signupDate],
-      [Abgabedatum:], [#author.today],
-      [Betreuer:], [#author.prof],
+      [Anmeldedatum:], [#paper.signupDate],
+      [Abgabedatum:], [#paper.today],
+      [Betreuer:], [#paper.tutor],
     )
   ]
 }
