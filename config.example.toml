@@ -7,6 +7,8 @@ courseOfStudies = "Software Engineering - Bachelor of Engineering (B. Eng.)"
 signupDate = "01.12.2024"
 tutor = "Prof. Dr. Tutorin"
 lang = "de"                                                                  # ISO 639-1/2/3 language code
+citationStyle = "chicago-author-date"                                        # ieee
+dateFormat = "[day].[month].[year]"
 
 [author]
 name = "Willy Wesen"

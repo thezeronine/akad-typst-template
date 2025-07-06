@@ -3,32 +3,33 @@
 
 #import "../glossary.typ": glossary-entries
 #import "../acronym.typ": acronym-entries
+#import "i18n.typ": *
 #import "titlepage.typ": titlepage
 
 #let config = toml("../config.toml")
 
-#let template(
-  paper: (
+#let template(doc) = {
+  // configuration
+  let paper = (
     title: config.paper.title,
     shortTitle: config.paper.shortTitle,
     signupDate: config.paper.signupDate,
-    today: datetime.today().display("[day].[month].[year]"),
+    today: datetime.today().display(config.paper.dateFormat),
     tutor: config.paper.tutor,
     courseOfStudy: config.paper.courseOfStudies,
     type: config.paper.type,
     module: config.paper.module,
     lang: config.paper.lang,
-  ),
-  author: (
+  )
+
+  let author= (
     name: config.author.name,
     street: config.author.street,
     city: config.author.city,
     studentId: config.author.studentId,
     email: config.author.email,
-  ),
+  )
 
-  doc,
-) = {
   // general setting
   set document(
     title: paper.title,
@@ -60,11 +61,11 @@
     spacing: 1.5em,
   )
 
+  // set spacing around elements
   set figure(gap: 1em)
-
   show figure: it => {
     show raw.where(block: true): set par(leading: 0.8em)
-  it
+      it
   }
   show figure: set block(above: 2em, below: 2em)
 
@@ -83,7 +84,7 @@
   pagebreak(weak: true)
 
   // Table of Figures
-  heading(level: 1, numbering: none)[Abbildungsverzeichnis]
+  heading(level: 1, numbering: none)[#HEADING_TOF.at(paper.lang)]
   outline(
     title: none,
     target: figure.where(kind: image),
@@ -91,15 +92,17 @@
   pagebreak(weak: true)
 
   // Acronyms
-  // init-acronyms(acronym-entries)
-  // heading(level: 1, numbering: none)[Abkürzungsverzeichnis]
-  // print-index(
-  //   title: none,
-  //   sorted: "down",
-  //   used-only: false,
-  //   row-gutter: 1.5em,
-  // )
-  // pagebreak(weak: true)
+  if acronym-entries.len() > 0 {
+    init-acronyms(acronym-entries)
+    heading(level: 1, numbering: none)[#HEADING_ACR.at(paper.lang)]
+    print-index(
+      title: none,
+      sorted: "down",
+      used-only: false,
+      row-gutter: 1.5em,
+    )
+    pagebreak(weak: true)
+  }
 
   // setup glossary
   show: make-glossary
@@ -133,13 +136,15 @@
   set page(numbering: "I")
 
   // Glossaries
-  heading(level: 1, numbering: none)[Glossar]
-  print-glossary(
-    glossary-entries,
-    disable-back-references: true,
-    entry-sortkey: x => x.short
-  )
-  pagebreak(weak: true)
+  if glossary-entries.len() > 0 {
+    heading(level: 1, numbering: none)[#HEADING_GLOSSARY.at(paper.lang)]
+    print-glossary(
+      glossary-entries,
+      disable-back-references: true,
+      entry-sortkey: x => x.short
+    )
+    pagebreak(weak: true)
+  }
 
   set heading(numbering: "A.1")
   counter(heading).update(0)
@@ -148,6 +153,6 @@
   pagebreak(weak: true)
 
   // bibliography
-  bibliography("../literature.bib", style: "chicago-author-date", title: "Literaturverzeichnis")
+  bibliography("../literature.bib", style: config.paper.citationStyle, title: [#HEADING_BIBLIOGRAPHY.at(config.paper.lang)])
   pagebreak(weak: true)
 }
