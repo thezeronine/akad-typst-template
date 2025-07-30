@@ -131,6 +131,7 @@
 
   // enable codly for code blocks
   show: codly-init.with()
+  codly(zebra-fill: luma(248), stroke: 0.05em + luma(200), radius: 0.15em)
 
   // Main content
   doc
