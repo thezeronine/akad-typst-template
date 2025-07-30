@@ -1,7 +1,6 @@
 #import "@preview/glossarium:0.5.6": gls, glspl
 #import "@preview/acrostiche:0.5.2": acr, acrpl
-
-#import "template/template.typ": template
+#import "template/template.typ": template, codly, codly-languages
 
 #show: template
 

@@ -1,5 +1,7 @@
 #import "@preview/glossarium:0.5.6": make-glossary, register-glossary, print-glossary
 #import "@preview/acrostiche:0.5.2": *
+#import "@preview/codly:1.3.0": *
+#import "@preview/codly-languages:0.1.1": *
 
 #import "../glossary.typ": glossary-entries
 #import "../acronym.typ": acronym-entries
@@ -126,6 +128,9 @@
 
   // format headings
   show heading: it => { v(1em) + text(it) + v(0.5em) }
+
+  // enable codly for code blocks
+  show: codly-init.with()
 
   // Main content
   doc
