@@ -81,6 +81,7 @@
   pagebreak(weak: true)
 
   // Table of Contents
+  counter(page).update(1)
   set page(numbering: "I")
   outline()
   pagebreak(weak: true)
