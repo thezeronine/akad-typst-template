@@ -71,6 +71,8 @@
   }
   show figure: set block(above: 2em, below: 2em)
 
+  show heading: set block(above: 2.5em, below: 1.5em)
+
   // state to save page counter for backmatter
   let frontmatter-pagecount = state("frontmatter-pagecount")
 
@@ -87,10 +89,26 @@
   pagebreak(weak: true)
 
   // Table of Figures
+  // this hides citations in image captions from the image outline
+  show outline.where(target: figure.where(kind: image)): it => {
+    show outline.entry: it => {
+      show cite: it => { }
+      it
+    }
+    it
+  }
   heading(level: 1, numbering: none)[#HEADING_TOF.at(paper.lang)]
   outline(
     title: none,
     target: figure.where(kind: image),
+  )
+  pagebreak(weak: true)
+
+  // Table of Listings
+  heading(level: 1, numbering: none)[#HEADING_TOL.at(paper.lang)]
+  outline(
+    title: none,
+    target: figure.where(kind: raw),
   )
   pagebreak(weak: true)
 
@@ -100,8 +118,8 @@
     heading(level: 1, numbering: none)[#HEADING_ACR.at(paper.lang)]
     print-index(
       title: none,
-      sorted: "down",
-      used-only: false,
+      sorted: "up",
+      used-only: true,
       row-gutter: 1.5em,
     )
     pagebreak(weak: true)
@@ -127,12 +145,13 @@
   )
   set heading(numbering: "1.1")
 
-  // format headings
-  show heading: it => { v(1em) + text(it) + v(0.5em) }
-
   // enable codly for code blocks
   show: codly-init.with()
-  codly(zebra-fill: luma(248), stroke: 0.05em + luma(200), radius: 0.15em)
+  codly(
+    zebra-fill: luma(248),
+    stroke: 0.05em + luma(200),
+    radius: 0.15em
+  )
 
   // Main content
   doc

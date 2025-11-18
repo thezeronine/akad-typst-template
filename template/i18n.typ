@@ -4,6 +4,11 @@
   "en": "Table of figures",
 )
 
+#let HEADING_TOL = (
+  "de": "Programmcodeverzeichnis",
+  "en": "Table of code listings",
+)
+
 #let HEADING_ACR = (
   "de": "Abkürzungsverzeichnis",
   "en": "Acronyms",
