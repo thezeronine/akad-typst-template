@@ -59,7 +59,7 @@
   set par(
     justify: true,
     first-line-indent: 2em,
-    leading: 1.5em, // one-half spacing
+    leading: 1em,
     spacing: 1.5em,
   )
 
