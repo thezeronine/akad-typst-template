@@ -53,7 +53,7 @@
     size: 12pt,
     ligatures: true,
     lang: paper.lang,
-    font: "DejaVu Serif",
+    font: config.misc.font,
   )
 
   set par(

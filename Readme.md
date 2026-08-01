@@ -13,4 +13,4 @@ typst compile main.typ main.pdf --root .
 
 ## Font
 
-- https://www.nerdfonts.com/font-downloads
+- https://github.com/liberationfonts/liberation-fonts

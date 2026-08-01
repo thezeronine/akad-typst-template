@@ -16,3 +16,6 @@ studentId = "123456789"
 email = "asd@asd.asd"
 street = "Haupstraße 123"
 city = "12345 Stadt"
+
+[misc]
+font = "Liberation Serif" # Liberation Sans
