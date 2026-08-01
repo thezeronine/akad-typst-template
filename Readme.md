@@ -10,3 +10,7 @@ rename `config.example.toml` to `config.toml` and adjust the values.
 typst watch main.typ main.pdf --root .
 typst compile main.typ main.pdf --root .
 ```
+
+## Font
+
+- https://www.nerdfonts.com/font-downloads
