@@ -1,7 +1,7 @@
-#import "@preview/glossarium:0.5.6": make-glossary, register-glossary, print-glossary
-#import "@preview/acrostiche:0.5.2": *
+#import "@preview/glossarium:0.5.10": make-glossary, print-glossary, register-glossary
+#import "@preview/acrostiche:0.7.0": *
 #import "@preview/codly:1.3.0": *
-#import "@preview/codly-languages:0.1.1": *
+#import "@preview/codly-languages:0.1.10": *
 
 #import "../glossary.typ": glossary-entries
 #import "../acronym.typ": acronym-entries
@@ -24,7 +24,7 @@
     lang: config.paper.lang,
   )
 
-  let author= (
+  let author = (
     name: config.author.name,
     street: config.author.street,
     city: config.author.city,
@@ -53,7 +53,7 @@
     size: 12pt,
     ligatures: true,
     lang: paper.lang,
-    font: "DejaVu Serif"
+    font: "DejaVu Serif",
   )
 
   set par(
@@ -67,7 +67,7 @@
   set figure(gap: 1em)
   show figure: it => {
     show raw.where(block: true): set par(leading: 0.8em)
-      it
+    it
   }
   show figure: set block(above: 2em, below: 2em)
 
@@ -92,7 +92,7 @@
   // this hides citations in image captions from the image outline
   show outline.where(target: figure.where(kind: image)): it => {
     show outline.entry: it => {
-      show cite: it => { }
+      show cite: it => {}
       it
     }
     it
@@ -150,7 +150,7 @@
   codly(
     zebra-fill: luma(248),
     stroke: 0.05em + luma(200),
-    radius: 0.15em
+    radius: 0.15em,
   )
 
   // Main content
@@ -167,7 +167,7 @@
     print-glossary(
       glossary-entries,
       disable-back-references: true,
-      entry-sortkey: x => x.short
+      entry-sortkey: x => x.short,
     )
     pagebreak(weak: true)
   }
@@ -179,6 +179,8 @@
   pagebreak(weak: true)
 
   // bibliography
-  bibliography("../literature.bib", style: config.paper.citationStyle, title: [#HEADING_BIBLIOGRAPHY.at(config.paper.lang)])
+  bibliography("../literature.bib", style: config.paper.citationStyle, title: [#HEADING_BIBLIOGRAPHY.at(
+    config.paper.lang,
+  )])
   pagebreak(weak: true)
 }
